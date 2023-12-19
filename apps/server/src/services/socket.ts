@@ -42,6 +42,7 @@ class SocketService{
 
             }
         })
+         sub.subscribe('MESSAGES',)
 
     }
 
@@ -51,17 +52,34 @@ class SocketService{
         io.on('connect',async socket=>{
             console.log(`newsocket connected`,socket.id);
 
+
+         
+
             socket.on('event:message',async({message}:{message:String})=>{
 
                 console.log('New mesage recieved',message)
                 //publish the message to redis
 
+                await pub.publish('MESSAGES',JSON.stringify({message}))
+
 
               })
-
+           
 
         
         });
+
+        sub.on('message',async (channel,message)=>{
+
+            if(channel==='MESSAGES'){
+
+            
+            console.log('New message from redis',message)
+            io.emit('message',message)
+
+            }
+        }
+        )
     }
 
 

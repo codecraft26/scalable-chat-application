@@ -7,20 +7,26 @@ import { useSocket } from '../context/SocketProvider'
 const page = () => {
 
 
-  const {sendMessage}=useSocket()
+  const {sendMessage,messages}=useSocket()
   const [message,setMessage]=useState('')
   return (
     <div>
-      <div>
-        All mee here
-
-      </div>
 
       <div>
     <input type="text" placeholder='Message....' className={classes["chat-input"]}  onChange={e=>setMessage(e.target.value)}/>
 
     <button onClick={(e)=>sendMessage(message)} className={classes['button']}>Send</button>
 
+      </div>
+
+      {
+        messages.map((msg,i)=>{
+          return <div key={i}>{msg}</div>
+        })
+      }
+
+      <div>
+        
       </div>
     </div>
   )
