@@ -8,7 +8,7 @@ import { ProduceMessage, createProducer } from './kafka'
 
 
 const pub=new Redis({
-    host:'redis-286982a7-gaman0221-c04c.a.aivencloud.com',
+    host:'redis-286982a7-97gaman0221-c04c.a.aivencloud.com',
     port:20124,
     password:'AVNS_JoLUVnU10Ojj885yy-b',
     username:'default',
