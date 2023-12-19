@@ -4,7 +4,7 @@ import path from "path"
 import prismaClient from "./prisma"
 const kafka = new Kafka({
 
-  brokers: ["kafka-3109a66d-gaman0221-c04c.a.aivencloud.com:20137"],
+  brokers: ["kafka-3109a66d-gaman0221-c04c.a.aivencloud.com:2013347"],
   ssl:{
     ca:[fs.readFileSync(path.resolve("./src/services/ca.pem"), "utf-8")],
   },
