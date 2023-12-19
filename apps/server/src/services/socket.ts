@@ -1,6 +1,7 @@
 import { Server } from 'socket.io'
 
 import { Redis } from 'ioredis'
+import prismaClient from './prisma'
 
 
 const pub=new Redis({
@@ -76,6 +77,13 @@ class SocketService{
             
             console.log('New message from redis',message)
             io.emit('message',message)
+
+           await prismaClient.message.create({
+               data:{
+                text:message,
+               }
+            })
+
 
             }
         }
