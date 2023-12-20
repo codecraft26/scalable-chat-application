@@ -1,6 +1,5 @@
 
 'use client'
-
 import React, { useState } from 'react'
 import classes from './page.module.css'
 import { useSocket } from '../context/SocketProvider'
@@ -9,6 +8,14 @@ const page = () => {
 
   const {sendMessage,messages}=useSocket()
   const [message,setMessage]=useState('')
+
+ const handleKeyPress=(e)=>{
+
+  if(e.key==="Enter"){
+    sendMessage(message)
+    setMessage('')
+  }
+ }
   return (
     <div className={classes["conatiner"]}> 
 
@@ -23,9 +30,17 @@ const page = () => {
 
 
       <div className={classes['message-input']}>
-    <input type="text" className={['user-message']} placeholder='Message....' className={classes["chat-input"]}  onChange={e=>setMessage(e.target.value)}/>
+    <input type="text"
+     className={classes['user-message']} 
+     onKeyPress={handleKeyPress} 
+     placeholder='Message....' 
+     value={message} 
+    onChange={e=>setMessage(e.target.value)}/>
 
-    <button onClick={(e)=>sendMessage(message)} className={classes['button']}>Send</button>
+    <button onClick={(e)=>sendMessage(message)}
+     className={classes['button']}>
+      Send
+      </button>
 
       </div>
       </div>    
