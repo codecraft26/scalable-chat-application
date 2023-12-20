@@ -42,7 +42,9 @@ export const SocketProvider:React.FC<SocketContextProps>=({children})=>{
 
 
     const sendMessage:ISocketContext['sendMessage']=useCallback((msg)=>{
-
+            if(!msg){
+                throw new Error("message is empty");
+            }
         console.log("send message to server",msg)
 
         if(socket){

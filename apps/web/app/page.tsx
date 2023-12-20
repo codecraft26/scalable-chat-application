@@ -8,14 +8,20 @@ const page = () => {
 
   const {sendMessage,messages}=useSocket()
   const [message,setMessage]=useState('')
+  const [error, setError] = useState('');
 
- const handleKeyPress=(e)=>{
 
-  if(e.key==="Enter"){
-    sendMessage(message)
-    setMessage('')
-  }
- }
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      if (message.trim() === '') {
+        setError('Message cannot be empty');
+      } else {
+        setError('');
+        sendMessage(message);
+        setMessage('');
+      }
+    }
+  };
   return (
     <div className={classes["conatiner"]}> 
 
@@ -41,7 +47,7 @@ const page = () => {
      className={classes['button']}>
       Send
       </button>
-
+  {error && <div className={classes['error-message']}>{error}</div>}
       </div>
       </div>    
    
